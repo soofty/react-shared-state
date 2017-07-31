@@ -1,0 +1,7 @@
+{
+  "presets": [ "./tools/babel-preset" ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-class-properties"
+  ]
+}
