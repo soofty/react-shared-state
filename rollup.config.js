@@ -2,6 +2,7 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
+import commonjs from 'rollup-plugin-commonjs'
 
 const env = process.env.NODE_ENV
 const config = {
@@ -16,6 +17,12 @@ const config = {
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env)
+    }),
+    commonjs({
+      namedExports: {
+        'node_modules/react/react.js': ['Children', 'Component', 'PropTypes', 'createElement'],
+        'node_modules/react-dom/index.js': ['render']
+      }
     })
   ]
 }
