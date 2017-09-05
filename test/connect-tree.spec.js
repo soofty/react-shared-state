@@ -20,7 +20,7 @@ describe('connectTree', () => {
         <Container />
       </SimpleProvider>
     )
-    expect(spy).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled()
 
     const stub = TestUtils.findRenderedComponentWithType(tree, Passthrough)
     expect(stub.props.provider).toBeInstanceOf(TreeState)
