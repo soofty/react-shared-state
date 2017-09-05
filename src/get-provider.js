@@ -16,7 +16,6 @@ export function getProvider(name, StateProxy = TreeState) {
       this.state = props.state || {}
     }
 
-
     getChildContext() {
       return {
         [name]: this.stateProxy
