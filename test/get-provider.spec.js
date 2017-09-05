@@ -10,6 +10,7 @@ describe('getProvider', () => {
     const stub = TestUtils.findRenderedComponentWithType(tree, SimpleProvider)
     expect(stub.state).toEqual({})
   })
+
   it('should rennder provider provided state', () => {
     const SimpleProvider = getProvider('provider')
     let state = {'name': 'John'}

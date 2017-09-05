@@ -1,19 +1,9 @@
 import React from 'react'
-import { shallow } from 'enzyme';
-
-
-import {connectTree, getProvider, TreeState} from '../src'
 import TestUtils from 'react-dom/test-utils'
 
+import { connectTree, getProvider, TreeState } from '../src'
+
 describe('connectTree', () => {
-
-  it('Provider should pass context via given name', () => {
-    const SimpleProvider = getProvider('provider')
-
-    const wrapper = shallow((
-      <SimpleProvider />
-    ))
-  })
 
   it('TreeState instance should be passed through props', () => {
     const SimpleProvider = getProvider('provider')
