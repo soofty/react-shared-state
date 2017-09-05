@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 
-export function mapTreeStateToProps(name, stateToProps) {
+export function connectTree(name, stateToProps) {
   return (InnerComponent) => {
     class MapHoc extends Component {
       onStateChange = (newState) => {
