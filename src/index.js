@@ -1,3 +1,3 @@
-export getProvider from './getProvider'
-export mapTreeStateToProps from './mapTreeStateToProps'
-export TreeState from './TreeState'
+export {getProvider} from './get-provider'
+export {mapTreeStateToProps} from './map-tree-state-to-props'
+export {TreeState} from './tree-state'

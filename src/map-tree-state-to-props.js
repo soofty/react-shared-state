@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 
-export default function mapTreeStateToProps(name, stateToProps) {
+export function mapTreeStateToProps(name, stateToProps) {
   return (InnerComponent) => {
     class MapHoc extends Component {
       onStateChange = (newState) => {
@@ -11,11 +11,11 @@ export default function mapTreeStateToProps(name, stateToProps) {
 
       constructor(props, context) {
         super()
-
         if (!context[name]) {
           /* eslint-disable no-console */
           console.error(`TreeState provider was not found at context.${name}`)
           /* eslint-enable no-console */
+          return
         }
         this.stateProxy = context[name]
 

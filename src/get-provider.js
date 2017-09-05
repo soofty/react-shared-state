@@ -1,18 +1,25 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TreeState from './TreeState'
+import {TreeState} from './tree-state'
 
-export default function getProvider(name, StateProxy = TreeState) {
+export function getProvider(name, StateProxy = TreeState) {
   class Provider extends Component {
     state = {}
 
     getState = () => this.state
     shouldComponentUpdate = () => false
 
+    constructor(props, context) {
+      super(props, context)
+      this.stateProxy = new StateProxy(this)
+      this.state = props.state || {}
+    }
+
+
     getChildContext() {
       return {
-        [name]: new StateProxy(this)
+        [name]: this.stateProxy
       }
     }
 
@@ -20,7 +27,7 @@ export default function getProvider(name, StateProxy = TreeState) {
       if (typeof this.props.children === 'string') {
         return <span>{this.props.children}</span>
       } else {
-        return this.props.children
+        return this.props.children || null
       }
     }
   }

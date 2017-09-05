@@ -1,6 +1,6 @@
 import signals from 'signals'
 
-export default class TreeState {
+export class TreeState {
   providerComponent = undefined
   onStateChange = null
 
