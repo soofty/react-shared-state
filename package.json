@@ -33,7 +33,7 @@
     "build:umd": "cross-env BABEL_ENV=umd NODE_ENV=development rollup -c -i src/index.js -o dist/react-vertical-state.js",
     "build:umd:min": "cross-env BABEL_ENV=umd NODE_ENV=production rollup -c -i src/index.js -o dist/react-vertical-state.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "prepare": "npm run clean && npm run lint && npm test && npm run build",
+    "prep": "npm run clean && npm run lint && npm test && npm run build",
     "watch": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --watch"
   },
   "peerDependencies": {
@@ -45,6 +45,7 @@
     "signals": "1.0.0"
   },
   "devDependencies": {
+    "@types/react": "15.0.21",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
