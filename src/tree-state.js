@@ -1,23 +1,22 @@
 import signals from 'signals'
 
 export class TreeState {
-  providerComponent = undefined
   onStateChange = null
 
-  constructor(providerComponent) {
-    this.providerComponent = providerComponent
+  constructor(initialState={}) {
     this.onStateChange = new signals.Signal()
+    this.state = initialState
   }
 
   setState = (partialState) => {
-    return this.providerComponent.setState(
-      partialState,
-      () => {
-        this.onStateChange.dispatch(this.providerComponent.state, partialState)
-      })
+    this.state = {
+      ...this.state,
+      ...partialState
+    }
+    this.onStateChange.dispatch(this.state, partialState)
   }
 
   getState = () => {
-    return this.providerComponent.state
+    return this.state
   }
 }

@@ -8,14 +8,14 @@ describe('getProvider', () => {
     const SimpleProvider = getProvider('provider')
     const tree = TestUtils.renderIntoDocument(<SimpleProvider />)
     const stub = TestUtils.findRenderedComponentWithType(tree, SimpleProvider)
-    expect(stub.state).toEqual({})
+    expect(stub.stateProxy.state).toEqual({})
   })
 
-  it('should rennder provider provided state', () => {
+  it('should render provider provided state', () => {
     const SimpleProvider = getProvider('provider')
     let state = {'name': 'John'}
     const tree = TestUtils.renderIntoDocument(<SimpleProvider state={{ 'name': 'John' }} />)
     const stub = TestUtils.findRenderedComponentWithType(tree, SimpleProvider)
-    expect(stub.state).toEqual(state)
+    expect(stub.stateProxy.state).toEqual(state)
   })
 })

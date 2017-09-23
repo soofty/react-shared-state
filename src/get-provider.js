@@ -7,13 +7,10 @@ import { connectTree } from './connect-tree'
 export function getProvider(name, StateProxy = TreeState) {
   class Provider extends Component {
     stateProxy = null
-    getState = () => this.state
-    shouldComponentUpdate = () => false
 
     constructor(props, context) {
       super(props, context)
-      this.stateProxy = new StateProxy(this)
-      this.state = props.state || {}
+      this.stateProxy = new StateProxy(props.state)
     }
 
     static connect(mapStateToProps) {

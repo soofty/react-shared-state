@@ -19,13 +19,13 @@ export function connectTree(name, stateToProps) {
         }
         this.stateProxy = context[name]
 
-        this.state = this.stateProxy.getState() || {}
+        this.state = this.stateProxy.getState()
         this.stateProxy.onStateChange.add(this.onStateChange)
       }
 
       render() {
         const props = {
-          ...(stateToProps ? stateToProps(this.state, this.props) : this.state),
+          ...(stateToProps && stateToProps(this.state, this.props)),
           [name]: this.stateProxy
         }
         return (

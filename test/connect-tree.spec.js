@@ -43,6 +43,23 @@ describe('connectTree', () => {
     expect(stub.props.name).toEqual('John')
   })
 
+  it('nothing must be passed from state if mapStateToProps is not passed', () => {
+    const SimpleProvider = getProvider('provider')
+    class Passthrough extends React.Component {
+      render() {
+        return <div />
+      }
+    }
+    const Container = connectTree('provider')(Passthrough)
+    const tree = TestUtils.renderIntoDocument(
+      <SimpleProvider state={{name: 'John'}}>
+        <Container />
+      </SimpleProvider>
+    )
+    const stub = TestUtils.findRenderedComponentWithType(tree, Passthrough)
+    expect(stub.props.name).toBeUndefined()
+  })
+
   it('state variables passed via mapStateToProps should be changed on state change', () => {
     const SimpleProvider = getProvider('provider')
     class Passthrough extends React.Component {
