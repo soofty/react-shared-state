@@ -5,18 +5,18 @@ export class TreeState {
 
   constructor(initialState={}) {
     this.onStateChange = new signals.Signal()
-    this.state = initialState
+    this._state = initialState
   }
 
   setState = (partialState) => {
-    this.state = {
-      ...this.state,
+    this._state = {
+      ...this._state,
       ...partialState
     }
-    this.onStateChange.dispatch(this.state, partialState)
+    this.onStateChange.dispatch(this._state, partialState)
   }
 
   getState = () => {
-    return this.state
+    return this._state
   }
 }
