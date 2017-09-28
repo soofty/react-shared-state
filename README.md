@@ -21,7 +21,8 @@ const SimpleProvider = getProvider(PROVIDER_KEY)
 const mapStateToProps = (state, props) => ({ name: state.name })
 @connect(PROVIDER_KEY, mapStateToProps)
 class Hello extends React.Component {
-  render = () => (<div>
+  render = () => (
+    <div>
       <h1> Hello, {this.props.name} </h1>
       <button onClick={() => this.props[PROVIDER_KEY].setState({ name: 'Max' })}>Set Name</button>
     </div>
