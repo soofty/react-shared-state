@@ -125,8 +125,11 @@ class Hello extends React.Component {
 ```
 
 
-### Debug
+### Logging
+![image](https://user-images.githubusercontent.com/29029/30979245-d2b6d146-a485-11e7-81a8-da0982c027b8.png)
+
 You can add logging for all stores
+
 ```
 import { ProviderComponent} from 'react-shared-state'
 
