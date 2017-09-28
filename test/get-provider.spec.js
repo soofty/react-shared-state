@@ -6,7 +6,7 @@ import TestUtils from 'react-dom/test-utils'
 describe('getProvider', () => {
   beforeEach(() => {
     ProviderComponent.DEBUG = false
-  });
+  })
 
   it('should render provider with blank state', () => {
     const SimpleProvider = getProvider('provider')
