@@ -34,7 +34,7 @@ describe('connect', () => {
     }
     const Container = connect('provider', (state)=>({name: state.name}))(Passthrough)
     const app = TestUtils.renderIntoDocument(
-      <SimpleProvider state={{name: 'John'}}>
+      <SimpleProvider initialState={{name: 'John'}}>
         <Container />
       </SimpleProvider>
     )

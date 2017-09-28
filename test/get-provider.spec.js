@@ -14,7 +14,7 @@ describe('getProvider', () => {
   it('should render provider provided state', () => {
     const SimpleProvider = getProvider('provider')
     let state = {'name': 'John'}
-    const provider = TestUtils.renderIntoDocument(<SimpleProvider state={{ 'name': 'John' }} />)
+    const provider = TestUtils.renderIntoDocument(<SimpleProvider initialState={{ 'name': 'John' }} />)
     const stub = TestUtils.findRenderedComponentWithType(provider, SimpleProvider)
     expect(stub.sharedStore._state).toEqual(state)
   })
