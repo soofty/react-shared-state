@@ -30,8 +30,8 @@
     "test:cov": "npm test -- --coverage",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=umd NODE_ENV=development rollup -c -i src/index.js -o dist/react-vertical-state.js",
-    "build:umd:min": "cross-env BABEL_ENV=umd NODE_ENV=production rollup -c -i src/index.js -o dist/react-vertical-state.min.js",
+    "build:umd": "cross-env BABEL_ENV=umd NODE_ENV=development rollup -c -i src/index.js -o dist/react-shared-state.js",
+    "build:umd:min": "cross-env BABEL_ENV=umd NODE_ENV=production rollup -c -i src/index.js -o dist/react-shared-state.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "prep": "npm run clean && npm run lint && npm test && npm run build",
     "watch": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --watch"
@@ -77,7 +77,8 @@
     "rollup-plugin-commonjs": "8.2.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup-plugin-uglify": "^2.0.1",
+    "size-limit": "0.11.4"
   },
   "npmName": "react-shared-state",
   "npmFileMap": [
@@ -99,5 +100,11 @@
   "keywords": [
     "react",
     "state"
+  ],
+  "size-limit": [
+    {
+      "path": "./dist/react-shared-state.min.js",
+      "limit": "9 KB"
+    }
   ]
 }
