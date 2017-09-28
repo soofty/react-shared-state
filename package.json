@@ -1,10 +1,10 @@
 {
-  "name": "react-tree-state",
-  "version": "0.0.5",
-  "description": "React Tree State",
+  "name": "react-shared-state",
+  "version": "0.1.0",
+  "description": "React Shared State",
   "repository": {
     "type": "git",
-    "url": "https://github.com/soofty/react-tree-state.git"
+    "url": "https://github.com/soofty/react-shared-state.git"
   },
   "license": "MIT",
   "authors": [
@@ -79,7 +79,7 @@
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^2.0.1"
   },
-  "npmName": "react-tree-state",
+  "npmName": "react-shared-state",
   "npmFileMap": [
     {
       "basePath": "/dist/",

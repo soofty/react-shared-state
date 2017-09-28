@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 
-export function connectTree(name, stateToProps) {
+export function connect(name, stateToProps) {
   return (InnerComponent) => {
     class MapHoc extends Component {
       onStateChange = (newState) => {
@@ -13,7 +13,7 @@ export function connectTree(name, stateToProps) {
         super()
         if (!context[name]) {
           /* eslint-disable no-console */
-          console.error(`TreeState provider was not found at context.${name}`)
+          console.error(`SharedState provider was not found at context.${name}`)
           /* eslint-enable no-console */
           return
         }

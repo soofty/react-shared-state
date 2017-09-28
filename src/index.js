@@ -1,3 +1,3 @@
-export {getProvider} from './get-provider'
-export {connectTree} from './connect-tree'
-export {TreeState} from './tree-state'
+export { getProvider } from './get-provider'
+export { connect } from './connect'
+export { SharedState } from './shared-state'

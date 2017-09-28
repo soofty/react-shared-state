@@ -1,10 +1,10 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { TreeState } from './tree-state'
-import { connectTree } from './connect-tree'
+import { SharedState } from './shared-state'
+import { connect } from './connect'
 
-export function getProvider(name, StateProxy = TreeState) {
+export function getProvider(name, StateProxy = SharedState) {
   class Provider extends Component {
     stateProxy = null
 
@@ -14,7 +14,7 @@ export function getProvider(name, StateProxy = TreeState) {
     }
 
     static connect(mapStateToProps) {
-      return connectTree(name, mapStateToProps)
+      return connect(name, mapStateToProps)
     }
 
     getChildContext() {

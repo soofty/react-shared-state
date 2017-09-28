@@ -13,7 +13,7 @@ interface MapStateToProps<TPropsFromState, TOuterProps> {
 }
 
 
-export class TreeState {
+export class SharedState {
   public setState(newState: object): void
 }
 
@@ -26,7 +26,7 @@ export class EnhancedComponent<ProxyProps = any, P = any, S = any> extends React
 
 export function getProvider<S, ProxyProps>(name: string, StateProxy?: new() => ProxyProps):  new() => EnhancedComponent<ProxyProps, any, S>
 
-export function connectTree<ProxyProps, TPropsFromState, TOuterProps>(
+export function connect<ProxyProps, TPropsFromState, TOuterProps>(
   name: string,
   mapStateToProps?: MapStateToProps<TPropsFromState, TOuterProps>,
 ): ComponentDecorator<TPropsFromState & ProxyProps, TOuterProps>;

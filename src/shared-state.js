@@ -1,6 +1,6 @@
 import signals from 'signals'
 
-export class TreeState {
+export class SharedState {
   onStateChange = null
 
   constructor(initialState={}) {
