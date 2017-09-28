@@ -13,20 +13,19 @@ interface MapStateToProps<TPropsFromState, TOuterProps> {
 }
 
 
-export class SharedState {
+export class SharedStore {
   public setState(newState: object): void
 }
 
-export class EnhancedComponent<ProxyProps = any, P = any, S = any> extends React.Component<P, S> {
-  stateProxy: ProxyProps
+export class EnhancedComponent<StoreProps = any, P = any, S = any> extends React.Component<P, S> {
+  sharedStore: StoreProps
 
   static connect(): void
-
 }
 
-export function getProvider<S, ProxyProps>(name: string, StateProxy?: new() => ProxyProps):  new() => EnhancedComponent<ProxyProps, any, S>
+export function getProvider<S, StoreProps>(name: string, StateProxy?: new() => StoreProps):  new() => EnhancedComponent<StoreProps, any, S>
 
-export function connect<ProxyProps, TPropsFromState, TOuterProps>(
+export function connect<StoreProps, TPropsFromState, TOuterProps>(
   name: string,
   mapStateToProps?: MapStateToProps<TPropsFromState, TOuterProps>,
-): ComponentDecorator<TPropsFromState & ProxyProps, TOuterProps>;
+): ComponentDecorator<TPropsFromState & StoreProps, TOuterProps>;

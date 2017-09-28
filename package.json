@@ -1,6 +1,6 @@
 {
   "name": "react-shared-state",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Shared State",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "signals": "1.0.0"
   },
   "devDependencies": {
-    "@types/react": "15.0.21",
+    "@types/react": "15.0.39",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",

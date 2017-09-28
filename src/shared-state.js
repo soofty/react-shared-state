@@ -1,6 +1,6 @@
 import signals from 'signals'
 
-export class SharedState {
+export class SharedStore {
   onStateChange = null
 
   constructor(initialState={}) {

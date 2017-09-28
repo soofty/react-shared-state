@@ -1,16 +1,17 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { SharedState } from './shared-state'
+
+import { SharedStore } from './shared-state'
 import { connect } from './connect'
 
-export function getProvider(name, StateProxy = SharedState) {
+export function getProvider(name, ProviderStore = SharedStore) {
   class Provider extends Component {
-    stateProxy = null
+    sharedStore = null
 
     constructor(props, context) {
       super(props, context)
-      this.stateProxy = new StateProxy(props.state)
+      this.sharedStore = new ProviderStore(props.state)
     }
 
     static connect(mapStateToProps) {
@@ -19,7 +20,7 @@ export function getProvider(name, StateProxy = SharedState) {
 
     getChildContext() {
       return {
-        [name]: this.stateProxy
+        [name]: this.sharedStore
       }
     }
 

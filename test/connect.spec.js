@@ -1,10 +1,10 @@
 import React from 'react'
 import TestUtils from 'react-dom/test-utils'
 
-import { connect, getProvider, SharedState } from '../src'
+import { connect, getProvider, SharedStore } from '../src'
 
 describe('connect', () => {
-  it('SharedState instance should be passed through props', () => {
+  it('SharedStore instance should be passed through props', () => {
     const SimpleProvider = getProvider('provider')
     class Passthrough extends React.Component {
       render() {
@@ -22,7 +22,7 @@ describe('connect', () => {
     expect(spy).not.toHaveBeenCalled()
 
     const stub = TestUtils.findRenderedComponentWithType(app, Passthrough)
-    expect(stub.props.provider).toBeInstanceOf(SharedState)
+    expect(stub.props.provider).toBeInstanceOf(SharedStore)
   })
 
   it('state variables should be mapped via mapStateToProps', () => {
@@ -73,7 +73,7 @@ describe('connect', () => {
       </SimpleProvider>
     )
     const provider = TestUtils.findRenderedComponentWithType(app, SimpleProvider)
-    provider.stateProxy.setState({name: 'Mary'})
+    provider.sharedStore.setState({name: 'Mary'})
     const stub = TestUtils.findRenderedComponentWithType(app, Passthrough)
     expect(stub.props.name).toEqual('Mary')
   })
