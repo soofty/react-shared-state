@@ -123,3 +123,21 @@ class Hello extends React.Component {
    ...
 }
 ```
+
+
+### Debug
+You can add logging for all stores
+```
+import { ProviderComponent} from 'react-shared-state'
+
+ProviderComponent.DEBUG = true
+```
+
+or individually
+
+```
+<SimpleProvider ... debug={true}>
+   ...
+</SimpleProvider>
+```
+
