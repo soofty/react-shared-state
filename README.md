@@ -14,12 +14,11 @@ Very simple shared store for your react app.
 import React from 'react'
 import { getProvider, connect } from 'react-shared-state/lib'
 
-let PROVIDER_KEY = 'simple_provider'
+const PROVIDER_KEY = 'simple_provider'
 const SimpleProvider = getProvider(PROVIDER_KEY)
 
 
-let mapStateToPtops = (state, props) => ({ name: state.name })
-
+const mapStateToPtops = (state, props) => ({ name: state.name })
 @connect(PROVIDER_KEY, mapStateToPtops)
 class Hello extends React.Component {
   render = () => (<div>
@@ -63,7 +62,7 @@ class GithubIssuesState extends SharedStore {
 }
 
 
-let PROVIDER_KEY = 'github'
+const PROVIDER_KEY = 'github'
 const GithubProvider = getProvider(PROVIDER_KEY, GithubIssuesState)
 
 @connect(PROVIDER_KEY, (state, props) => ({ issuesCount: state.issuesCount, loading: state.loading }))
@@ -112,13 +111,12 @@ export default class App extends Component {
 
 ### Using custom connect
 It's very useful to create custom `connect` function to connect to specified provider
-```
-
-let PROVIDER_KEY = 'simple_provider'
+```javascript
+const PROVIDER_KEY = 'simple_provider'
 const SimpleProvider = getProvider(PROVIDER_KEY)
 const simpleConnect = (...args) => connect(PROVIDER_KEY, ...args)
 
-let mapStateToPtops = (state, props) => ({ name: state.name })
+const mapStateToPtops = (state, props) => ({ name: state.name })
 
 @simpleConnect(mapStateToPtops)
 class Hello extends React.Component {
