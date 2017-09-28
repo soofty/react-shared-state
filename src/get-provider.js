@@ -11,7 +11,7 @@ export function getProvider(name, ProviderStore = SharedStore) {
 
     constructor(props, context) {
       super(props, context)
-      this.sharedStore = new ProviderStore(props.state)
+      this.sharedStore = new ProviderStore(props.initialState)
     }
 
     static connect(mapStateToProps) {
@@ -25,11 +25,10 @@ export function getProvider(name, ProviderStore = SharedStore) {
     }
 
     render() {
-      if (typeof this.props.children === 'string') {
-        return <span>{this.props.children}</span>
-      } else {
-        return this.props.children || null
+      if (!this.props.children) {
+        return null
       }
+      return <span>{this.props.children}</span>
     }
   }
 
