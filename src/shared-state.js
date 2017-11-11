@@ -25,6 +25,7 @@ export class SharedStore {
       console.log(`Old state  `, this._state)
       console.log(`Changes    `, partialState)
       console.log(`New state  `, newState)
+      console.groupEnd()
     }
 
     this._state = newState
