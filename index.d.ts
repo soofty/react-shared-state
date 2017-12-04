@@ -14,8 +14,10 @@ interface MapStateToProps<TPropsFromState, TOuterProps> {
 
 
 export class SharedStore<State = {}> {
-  _store: State
+  state: State
+
   public setState(newState: Partial<State>): void
+  public getState(): State
 }
 
 export class EnhancedComponent<StoreProps = any, P = any, S = any> extends React.Component<P, S> {
