@@ -2,7 +2,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import { SharedStore } from './shared-state'
+import { SharedStore } from './shared-store'
 import { connect } from './connect'
 
 export class ProviderComponent extends Component {
