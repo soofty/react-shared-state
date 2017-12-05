@@ -16,6 +16,7 @@ interface MapStateToProps<TPropsFromState, TOuterProps> {
 export class SharedStore<State = {}> {
   state: State
 
+  constructor(storeName: string, initialState: any)
   public setState(newState: Partial<State>): void
   public getState(): State
 }
