@@ -27,7 +27,10 @@ export class EnhancedComponent<StoreProps = any, P = any, S = any> extends React
   static connect(): void
 }
 
-export function getProvider<S, StoreProps>(name: string, StateProxy?: new() => StoreProps):  new() => EnhancedComponent<StoreProps, any, S>
+export function getProvider<S, StoreProps>(
+  name: string,
+  StateProxy?: new(storeName: string, initialState?: any) => StoreProps
+):  new() => EnhancedComponent<StoreProps, any, S>
 
 export function connect<StoreProps, TPropsFromState, TOuterProps>(
   name: string,
