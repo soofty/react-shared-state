@@ -34,7 +34,8 @@
     "build:umd:min": "cross-env BABEL_ENV=umd NODE_ENV=production rollup -c -i src/index.js -o dist/react-shared-state.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "prep": "npm run clean && npm run lint && npm test && npm run build",
-    "watch": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --watch"
+    "watch": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --watch",
+    "pub": "yarn prep && yarn publish"
   },
   "peerDependencies": {
     "prop-types": ">=15",

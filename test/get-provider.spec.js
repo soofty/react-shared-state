@@ -12,7 +12,7 @@ describe('getProvider', () => {
     const SimpleProvider = getProvider('provider')
     const provider = TestUtils.renderIntoDocument(<SimpleProvider />)
     const stub = TestUtils.findRenderedComponentWithType(provider, SimpleProvider)
-    expect(stub.sharedStore._state).toEqual({})
+    expect(stub.sharedStore.state).toEqual({})
   })
 
   it('should render provider provided state', () => {
@@ -20,7 +20,7 @@ describe('getProvider', () => {
     let state = {'name': 'John'}
     const provider = TestUtils.renderIntoDocument(<SimpleProvider initialState={{ 'name': 'John' }} />)
     const stub = TestUtils.findRenderedComponentWithType(provider, SimpleProvider)
-    expect(stub.sharedStore._state).toEqual(state)
+    expect(stub.sharedStore.state).toEqual(state)
   })
 
   it('should set DEBUG globally', () => {

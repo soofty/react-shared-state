@@ -59,7 +59,7 @@ class GithubIssuesStore extends SharedStore {
   }
 
   resetCount = () => this.setState({ issuesCount: 0 })
-  incrementCount = () => this.setState({ issuesCount: this._state.issuesCount += 1 })
+  incrementCount = () => this.setState({ issuesCount: this.state.issuesCount += 1 })
 }
 
 
