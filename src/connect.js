@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React  from 'react'
 import PropTypes from 'prop-types'
 
 
 export function connect(name, storeToProps) {
   return (InnerComponent) => {
-    class MapHoc extends Component {
+    class MapHoc extends React.Component {
       onStateChange = (newState) => {
         this.setState(newState)
       }

@@ -1,11 +1,11 @@
 /* eslint react/prop-types: 0 */
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { SharedStore } from './shared-store'
 import { connect } from './connect'
 
-export class ProviderComponent extends Component {
+export class ProviderComponent extends React.Component {
   static DEBUG = false // we can set it globally
 }
 
