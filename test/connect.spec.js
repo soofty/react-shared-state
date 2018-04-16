@@ -4,27 +4,6 @@ import TestUtils from 'react-dom/test-utils'
 import { connect, getProvider, SharedStore } from '../src'
 
 describe('connect', () => {
-  it('SharedStore instance should be passed through props', () => {
-    const SimpleProvider = getProvider('provider')
-    class Passthrough extends React.Component {
-      render() {
-        return <div />
-      }
-    }
-    const Container = connect('provider')(Passthrough)
-
-    const spy = jest.spyOn(console, 'error')
-    const app = TestUtils.renderIntoDocument(
-      <SimpleProvider>
-        <Container />
-      </SimpleProvider>
-    )
-    expect(spy).not.toHaveBeenCalled()
-
-    const stub = TestUtils.findRenderedComponentWithType(app, Passthrough)
-    expect(stub.props.provider).toBeInstanceOf(SharedStore)
-  })
-
   it('state variables should be mapped via mapStateToProps', () => {
     const SimpleProvider = getProvider('provider')
     class Passthrough extends React.Component {
@@ -32,7 +11,7 @@ describe('connect', () => {
         return <div />
       }
     }
-    const Container = connect('provider', (state)=>({name: state.name}))(Passthrough)
+    const Container = connect('provider', (store)=>({name: store.state.name}))(Passthrough)
     const app = TestUtils.renderIntoDocument(
       <SimpleProvider initialState={{name: 'John'}}>
         <Container />
@@ -66,7 +45,7 @@ describe('connect', () => {
         return <div />
       }
     }
-    const Container = connect('provider', (state)=>({name: state.name}))(Passthrough)
+    const Container = connect('provider', (store)=>({name: store.state.name}))(Passthrough)
     const app = TestUtils.renderIntoDocument(
       <SimpleProvider state={{name: 'John'}}>
         <Container />

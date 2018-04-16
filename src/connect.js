@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 
-export function connect(name, stateToProps) {
+export function connect(name, storeToProps) {
   return (InnerComponent) => {
     class MapHoc extends Component {
       onStateChange = (newState) => {
@@ -17,16 +17,13 @@ export function connect(name, stateToProps) {
           /* eslint-enable no-console */
           return
         }
-        this.stateProxy = context[name]
-
-        this.state = this.stateProxy.getState()
-        this.stateProxy.onStateChange.add(this.onStateChange)
+        this.store = context[name]
+        this.store.onStateChange.add(this.onStateChange)
       }
 
       render() {
         const props = {
-          ...(stateToProps && stateToProps(this.state, this.props)),
-          [name]: this.stateProxy
+          ...(storeToProps && storeToProps(this.store, this.props)),
         }
         return (
           <InnerComponent
