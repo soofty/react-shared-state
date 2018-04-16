@@ -1,6 +1,6 @@
 {
   "name": "react-shared-state",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React Shared State",
   "repository": {
     "type": "git",
@@ -38,10 +38,10 @@
     "pub": "yarn prep && yarn publish"
   },
   "peerDependencies": {
+    "@types/react": ">=16.3",
     "prop-types": ">=15",
     "react": ">=16.3",
-    "react-dom": ">=16.3",
-    "@types/react": ">=16.3"
+    "react-dom": ">=16.3"
   },
   "dependencies": {
     "signals": "1.0.0"
