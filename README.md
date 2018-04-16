@@ -4,99 +4,76 @@
 
 Very simple shared store for your react app.
 
+## 0.1.x => 0.2.x migration guide
+
+**Important!** 0.2 has changed `connect`'s behavior.
+
+1. mapStateToProps now accepts `store` instead of `state.store` as first argument
+2. `connect` no longer passes `store` by it's name to a component
+
+
 ## Usage
 
-### Basic Usage ([WebpackBin](https://www.webpackbin.com/bins/-Kv6suDDJxqwug4rLpFh))
-1. Add provider to keep our state
-2. connect function to use with this provider
+### Extending State ([WebpackBin](https://codesandbox.io/s/qqk6lq7xj9))
 
 ```javascript
-import React from 'react'
-import { getProvider, connect } from 'react-shared-state'
-
-const PROVIDER_KEY = 'simple_provider'
-const SimpleProvider = getProvider(PROVIDER_KEY)
-
-
-const mapStateToProps = (state, props) => ({ name: state.name })
-@connect(PROVIDER_KEY, mapStateToProps)
-class Hello extends React.Component {
-  render = () => (
-    <div>
-      <h1> Hello, {this.props.name} </h1>
-      <button onClick={() => this.props[PROVIDER_KEY].setState({ name: 'Max' })}>Set Name</button>
-    </div>
-  )
-}
-
-export function App() {
-  return (
-    <SimpleProvider initialState={{ name: 'Anonymous' }}>
-      <Hello />
-    </SimpleProvider>
-  )
-}
-```
-
-### Extending State ([WebpackBin](https://www.webpackbin.com/bins/-Kv6uj9SWKoHoV8Oz9P2))
-
-```javascript
-import React, { Component } from 'react'
-import { getProvider, connect, SharedStore } from 'react-shared-state'
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { getProvider, SharedStore } from "react-shared-state";
 
 class GithubIssuesStore extends SharedStore {
-  loadCountFromGithub = () => {
-    this.setState({ loading: true })
+  state = {
+    loading: false,
+    issuesCount: 0
+  };
 
-    fetch('https://api.github.com/repos/vmg/redcarpet/issues?state=closed')
-      .then((resp) => resp.json())
-      .then((data) => {
+  loadCountFromGithub = () => {
+    this.setState({ loading: true });
+
+    fetch("https://api.github.com/repos/vmg/redcarpet/issues?state=closed")
+      .then(resp => resp.json())
+      .then(data => {
         this.setState({
           issuesCount: data.length,
           loading: false
-        })
-      })
-  }
+        });
+      });
+  };
 
-  resetCount = () => this.setState({ issuesCount: 0 })
-  incrementCount = () => this.setState({ issuesCount: this.state.issuesCount += 1 })
+  resetCount = () => this.setState({ issuesCount: 0 });
+  incrementCount = () => this.setState({ issuesCount: this.state.issuesCount += 1 });
 }
 
+const GithubProvider = getProvider("github", GithubIssuesStore);
 
-const PROVIDER_KEY = 'github'
-const GithubProvider = getProvider(PROVIDER_KEY, GithubIssuesStore)
-
-@connect(PROVIDER_KEY, (state, props) => ({ issuesCount: state.issuesCount, loading: state.loading }))
+@GithubProvider.connect((store, props) => ({
+  issuesCount: store.state.issuesCount,
+  loading: store.state.loading
+}))
 class IssuesCount extends React.Component {
   render = () => {
-    const { issuesCount, loading } = this.props
-    return (
-      <h1>
-        Issues count: {loading ? '...' : issuesCount}
-      </h1>
-    )
-  }
+    const { issuesCount, loading } = this.props;
+    return <h1>Issues count: {loading ? "..." : issuesCount}</h1>;
+  };
 }
 
-
 // We can use compose as a HOC call
-const ControlButtonsComponent = (props) => (
+const ControlButtonsComponent = props => (
   <div>
-    <button onClick={() => props.github.loadCountFromGithub()}>
+    <button onClick={() => props.loadCountFromGithub()}>
       Load From GitHub
     </button>
-    <button onClick={() => props.github.resetCount()}>
-      Reset
-    </button>
-    <button onClick={() => props.github.incrementCount()}>
-      Increment
-    </button>
+    <button onClick={() => props.resetCount()}>Reset</button>
+    <button onClick={() => props.incrementCount()}>Increment</button>
   </div>
-)
-const ControlButtons = connect(PROVIDER_KEY)(ControlButtonsComponent)
+);
+const ControlButtons = GithubProvider.connect(store => ({
+  loadCountFromGithub: store.loadCountFromGithub,
+  resetCount: store.resetCount,
+  incrementCount: store.incrementCount
+}))(ControlButtonsComponent);
 
-
-export default class App extends Component {
+export class App extends Component {
   render() {
     return (
       <div>
@@ -105,24 +82,11 @@ export default class App extends Component {
           <ControlButtons />
         </GithubProvider>
       </div>
-    )
+    );
   }
 }
-```
+ReactDOM.render(<App />, document.getElementById("root"));
 
-### Using custom connect
-It's very useful to create custom `connect` function to connect to specified provider
-```javascript
-const PROVIDER_KEY = 'simple_provider'
-const SimpleProvider = getProvider(PROVIDER_KEY)
-const simpleConnect = (...args) => connect(PROVIDER_KEY, ...args)
-
-const mapStateToProps = (state, props) => ({ name: state.name })
-
-@simpleConnect(mapStateToProps)
-class Hello extends React.Component {
-   ...
-}
 ```
 
 
