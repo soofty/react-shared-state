@@ -1,11 +1,8 @@
 import * as React from 'react'
 
-type ComponentClass<P> = React.ComponentClass<P>;
-type StatelessComponent<P> = React.StatelessComponent<P>;
-
 
 interface ComponentDecorator<TOriginalProps, TOuterProps> {
-  (component: ComponentClass<TOriginalProps> | StatelessComponent<TOriginalProps>): ComponentClass<TOuterProps>;
+  (component: React.ComponentClass<TOriginalProps> | React.StatelessComponent<TOriginalProps>): React.ComponentClass<TOuterProps>;
 }
 
 interface MapStateToProps<Store, TOuterProps, TMappedProps> {
@@ -24,15 +21,17 @@ export class SharedStore<State = {}> {
 
 export class EnhancedComponent<Store extends SharedStore, P = any, S = any> extends React.Component<P, S> {
   sharedStore: Store
-  static connect(): void
 }
 
 export function getProvider<Store extends SharedStore>(
   name: string,
   StoreClass?: new(storeName: string, initialState?: any) => Store
-):  new() => EnhancedComponent<Store>
+):  {
+  new(): EnhancedComponent<Store>
+  connect<TOuterProps, TInnerProps>(mapStoreToProps: MapStateToProps<Store, TOuterProps, TInnerProps>): ComponentDecorator<TInnerProps, TOuterProps>
+}
 
-export function connect<Store, TOuterProps, TMappedProps>(
+export function connect<Store, TOuterProps, TInnerProps>(
   name: string,
-  mapStateToProps?: MapStateToProps<Store, TOuterProps, TMappedProps>,
-): ComponentDecorator<Store, TOuterProps>;
+  mapStateToProps?: MapStateToProps<Store, TOuterProps, TInnerProps>,
+): ComponentDecorator<TInnerProps, TOuterProps>;
