@@ -10,13 +10,13 @@ export class ProviderComponent extends Component {
 }
 
 
-export function getProvider(name, ProviderStore = SharedStore) {
+export function getProvider(name, StoreClass = SharedStore) {
   class Provider extends ProviderComponent {
     sharedStore = null
 
     constructor(props, context) {
       super(props, context)
-      this.sharedStore = new ProviderStore(name, props.initialState)
+      this.sharedStore = new StoreClass(name, props.initialState)
       this.sharedStore.setDebug(props.debug || ProviderComponent.DEBUG)
     }
 
@@ -41,6 +41,5 @@ export function getProvider(name, ProviderStore = SharedStore) {
   Provider.childContextTypes = {
     [name]: PropTypes.object
   }
-
   return Provider
 }

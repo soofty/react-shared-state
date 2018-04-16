@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-dom/test-utils'
 
-import { connect, getProvider, SharedStore } from '../src'
+import { connect, getProvider } from '../src'
 
 describe('connect', () => {
   it('state variables should be mapped via mapStateToProps', () => {

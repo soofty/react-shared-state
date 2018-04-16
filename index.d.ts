@@ -8,8 +8,8 @@ interface ComponentDecorator<TOriginalProps, TOuterProps> {
   (component: ComponentClass<TOriginalProps> | StatelessComponent<TOriginalProps>): ComponentClass<TOuterProps>;
 }
 
-interface MapStateToProps<TPropsFromState, TOuterProps> {
-  (state: any, ownProps?: TOuterProps): TPropsFromState;
+interface MapStateToProps<Store, TOuterProps, TMappedProps> {
+  (state: Store, ownProps?: TOuterProps): TMappedProps;
 }
 
 
@@ -22,18 +22,17 @@ export class SharedStore<State = {}> {
   public stateDidSet(oldState: State, newState: State): void
 }
 
-export class EnhancedComponent<StoreProps = any, P = any, S = any> extends React.Component<P, S> {
-  sharedStore: StoreProps
-
+export class EnhancedComponent<Store extends SharedStore, P = any, S = any> extends React.Component<P, S> {
+  sharedStore: Store
   static connect(): void
 }
 
-export function getProvider<S, StoreProps>(
+export function getProvider<Store extends SharedStore>(
   name: string,
-  StateProxy?: new(storeName: string, initialState?: any) => StoreProps
-):  new() => EnhancedComponent<StoreProps, any, S>
+  StoreClass?: new(storeName: string, initialState?: any) => Store
+):  new() => EnhancedComponent<Store>
 
-export function connect<StoreProps, TPropsFromState, TOuterProps>(
+export function connect<Store, TOuterProps, TMappedProps>(
   name: string,
-  mapStateToProps?: MapStateToProps<TPropsFromState, TOuterProps>,
-): ComponentDecorator<TPropsFromState & StoreProps, TOuterProps>;
+  mapStateToProps?: MapStateToProps<Store, TOuterProps, TMappedProps>,
+): ComponentDecorator<Store, TOuterProps>;
