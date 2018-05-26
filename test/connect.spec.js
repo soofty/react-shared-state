@@ -4,16 +4,18 @@ import TestUtils from 'react-dom/test-utils'
 import { connect, getProvider } from '../src'
 
 describe('connect', () => {
-  it('state variables should be mapped via mapStateToProps', () => {
+  it('state variables should be mapped via storeToProps', () => {
     const SimpleProvider = getProvider('provider')
+
     class Passthrough extends React.Component {
       render() {
         return <div />
       }
     }
-    const Container = connect('provider', (store)=>({name: store.state.name}))(Passthrough)
+
+    const Container = connect('provider', (store) => ({ name: store.state.name }))(Passthrough)
     const app = TestUtils.renderIntoDocument(
-      <SimpleProvider initialState={{name: 'John'}}>
+      <SimpleProvider initialState={{ name: 'John' }}>
         <Container />
       </SimpleProvider>
     )
@@ -21,38 +23,27 @@ describe('connect', () => {
     expect(stub.props.name).toEqual('John')
   })
 
-  it('nothing must be passed from state if mapStateToProps is not passed', () => {
-    const SimpleProvider = getProvider('provider')
-    class Passthrough extends React.Component {
-      render() {
-        return <div />
-      }
-    }
-    const Container = connect('provider')(Passthrough)
-    const app = TestUtils.renderIntoDocument(
-      <SimpleProvider state={{name: 'John'}}>
-        <Container />
-      </SimpleProvider>
-    )
-    const stub = TestUtils.findRenderedComponentWithType(app, Passthrough)
-    expect(stub.props.name).toBeUndefined()
+  it('nothing must be passed from state if storeToProps is not passed', () => {
+    expect(() => connect('anyProvider')(() => <div>Hello</div>)).toThrow('stateToProps is undefined for anyProvider')
   })
 
-  it('state variables passed via mapStateToProps should be changed on state change', () => {
+  it('state variables passed via storeToProps should be changed on state change', () => {
     const SimpleProvider = getProvider('provider')
+
     class Passthrough extends React.Component {
       render() {
         return <div />
       }
     }
-    const Container = connect('provider', (store)=>({name: store.state.name}))(Passthrough)
+
+    const Container = connect('provider', (store) => ({ name: store.state.name }))(Passthrough)
     const app = TestUtils.renderIntoDocument(
-      <SimpleProvider state={{name: 'John'}}>
+      <SimpleProvider state={{ name: 'John' }}>
         <Container />
       </SimpleProvider>
     )
     const provider = TestUtils.findRenderedComponentWithType(app, SimpleProvider)
-    provider.sharedStore.setState({name: 'Mary'})
+    provider.sharedStore.setState({ name: 'Mary' })
     const stub = TestUtils.findRenderedComponentWithType(app, Passthrough)
     expect(stub.props.name).toEqual('Mary')
   })
