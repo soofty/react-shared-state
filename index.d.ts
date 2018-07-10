@@ -18,8 +18,8 @@ export class EnhancedComponent<Store extends SharedStore, P = any, S = any> exte
   sharedStore: Store
 }
 
-interface MapStateToProps<Store, TInnerProps, TOuterProps, > {
-  (state: Store, ownProps: TOuterProps): TInnerProps;
+interface MapStateToProps<Store, TInnerProps, TOuterProps> {
+  (state: Store, ownProps: TInnerProps & TOuterProps): Partial<TInnerProps>;
 }
 
 export function getProvider<Store extends SharedStore>(
