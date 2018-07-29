@@ -2,7 +2,7 @@
 
 ## Basic concepts
 
-To understand how to use the library you should only understand 3 basic things
+To understand how to use the library you should only understand 3 basic things:
 
 * State 
 * Store
