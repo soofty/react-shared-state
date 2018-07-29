@@ -2,7 +2,7 @@
 
 # React Shared State
 
-Very simple shared store for your react app.
+Very simple shared state for your react app.
 
 ## Quickstart
 
