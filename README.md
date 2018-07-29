@@ -12,48 +12,6 @@ Very simple shared state for your react app.
 ## Quickstart  
 https://soofty.gitbook.io/react-shared-state/quickstart
     
-### 1. Create provider
-
-```javascript
-// simple-provider.js
-import React from 'react'
-import { createProvider } from 'react-shared-state'
-
-const SimpleProvider = createProvider('simple_provider')
-```
-
-### 2. Add it to your app root  
-```javascript
-// app.js
-export function App() {
-  return (
-    <SimpleProvider initialState={{ name: 'Anonymous' }}>
-      <Hello />
-    </SimpleProvider>
-  )
-}
-```
-
-### 3. Use it with your component
-
-```javascript
-// hello.js
-import React from 'react'
-import { SimpleProvider } from './simple-provider.js'
-
-const HelloComponent = (props) => {
-  <div>
-    <h1> Hello, {props.name} </h1>
-    <button onClick={() => props.store.setState({ name: 'John' })}>Set Name</button>
-  </div>
-}
-
-export const Hello = SimpleProvider.connect((store) => ({
-  store,
-  name: store.state.name
-}))(HelloComponent) 
-```
-    
 ## Documentation  
 https://soofty.gitbook.io/react-shared-state/documentation
 
