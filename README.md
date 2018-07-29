@@ -8,26 +8,30 @@ Very simple shared state for your react app.
 
 ```jsx
 import React from 'react'
-import { createProvider } from 'react-shared-state'
+import { createProvider, SharedStore } from 'react-shared-state'
 
-const SimpleProvider = createProvider('simple_provider')
+class NameStore extends SharedStore {
+  setName = (newName) => this.setState({name: newName})
+}
 
+const NameProvider = createProvider('simple_provider', NameStore)
+ 
 const HelloComponent = (props) => {
   return <div>
     <h1> Hello, {props.name} </h1>
-    <button onClick={() => props.store.setState({ name: 'Max' })}>Set Name</button>
+    <button onClick={() => props.store.setName('Luke Skywalker')}>Set Name</button>
   </div>
 }
-const Hello = SimpleProvider.connect((store) => ({ 
+const Hello = NameProvider.connect((store) => ({ 
   name: store.state.name,
   store: store 
 }))(HelloComponent)
 
 export function App() {
   return (
-    <SimpleProvider initialState={{ name: 'Anonymous' }}>
+    <NameProvider initialState={{ name: 'Anonymous' }}>
       <Hello />
-    </SimpleProvider>
+    </NameProvider>
   )
 }
 ```
