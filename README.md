@@ -4,6 +4,36 @@
 
 Very simple shared state for your react app.
 
+{% code-tabs %}
+{% code-tabs-item title="app.js" %}
+```javascript
+import React from 'react'
+import { createProvider } from 'react-shared-state'
+
+const SimpleProvider = createProvider('simple_provider')
+ 
+const HelloComponent = (props) => {
+  return <div>
+    <h1> Hello, {props.name} </h1>
+    <button onClick={() => props.store.setState({ name: 'Max' })}>Set Name</button>
+  </div>
+}
+const Hello = SimpleProvider.connect((store) => ({ 
+  name: store.state.name,
+  store: store 
+}))(HelloComponent)
+
+export function App() {
+  return (
+    <SimpleProvider initialState={{ name: 'Anonymous' }}>
+      <Hello />
+    </SimpleProvider>
+  )
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
 ## Install  
    ```yarn add react-shared-state```   
    or   
