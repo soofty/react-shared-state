@@ -1,5 +1,5 @@
 import { SharedStore } from '../src'
-import 'raf/polyfill';
+import 'raf/polyfill'
 
 describe('SharedStore', () => {
 
