@@ -22,6 +22,14 @@ interface MapStateToProps<Store, TInnerProps, TOuterProps> {
   (state: Store, ownProps: TInnerProps & TOuterProps): Partial<TInnerProps>;
 }
 
+export function createProvider<Store extends SharedStore>(
+  name: string,
+  StoreClass?: new(storeName: string, initialState?: any) => Store
+):  {
+  new(): EnhancedComponent<Store>
+  connect<TInnerProps, TOuterProps>(mapStoreToProps: MapStateToProps<Store, TInnerProps, TOuterProps>): ComponentDecorator<TInnerProps, TOuterProps>
+}
+
 export function getProvider<Store extends SharedStore>(
   name: string,
   StoreClass?: new(storeName: string, initialState?: any) => Store

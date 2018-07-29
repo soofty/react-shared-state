@@ -21,7 +21,7 @@ Very simple shared store for your react app.
 ```javascript
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { getProvider, SharedStore } from "react-shared-state";
+import { createProvider, SharedStore } from "react-shared-state";
 
 class GithubIssuesStore extends SharedStore {
   state = {
@@ -46,7 +46,7 @@ class GithubIssuesStore extends SharedStore {
   incrementCount = () => this.setState({ issuesCount: this.state.issuesCount += 1 });
 }
 
-const GithubProvider = getProvider("github", GithubIssuesStore);
+const GithubProvider = createProvider("github", GithubIssuesStore);
 
 @GithubProvider.connect((store, props) => ({
   issuesCount: store.state.issuesCount,

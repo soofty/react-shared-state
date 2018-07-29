@@ -1,11 +1,11 @@
 import React from 'react'
 import TestUtils from 'react-dom/test-utils'
 
-import { connect, getProvider } from '../src'
+import { connect, createProvider } from '../src'
 
 describe('connect', () => {
   it('state variables should be mapped via storeToProps', () => {
-    const SimpleProvider = getProvider('provider')
+    const SimpleProvider = createProvider('provider')
 
     class Passthrough extends React.Component {
       render() {
@@ -28,7 +28,7 @@ describe('connect', () => {
   })
 
   it('state variables passed via storeToProps should be changed on state change', () => {
-    const SimpleProvider = getProvider('provider')
+    const SimpleProvider = createProvider('provider')
 
     class Passthrough extends React.Component {
       render() {

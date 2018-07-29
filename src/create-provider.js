@@ -10,7 +10,7 @@ export class ProviderComponent extends React.Component {
 }
 
 
-export function getProvider(name, StoreClass = SharedStore) {
+export function createProvider(name, StoreClass = SharedStore) {
   class Provider extends ProviderComponent {
     sharedStore = null
 
@@ -42,4 +42,10 @@ export function getProvider(name, StoreClass = SharedStore) {
     [name]: PropTypes.object
   }
   return Provider
+}
+
+
+export function getProvider(name, StoreClass = SharedStore) {
+  console.warn('getProvider is deprecated. Please use createProvider instead')
+  return createProvider(name, StoreClass)
 }
