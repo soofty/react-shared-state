@@ -8,8 +8,7 @@
   },
   "license": "MIT",
   "authors": [
-    "Maxim Syabro <maxim@syabro.com>",
-    "Artyom Pogrebnoy <tem.rdm@gmail.com>"
+    "Maxim Syabro <maxim@syabro.com>"
   ],
   "files": [
     "dist",
