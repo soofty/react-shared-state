@@ -4,75 +4,64 @@
 
 Very simple shared state for your react app.
 
-## Quickstart
+## Install  
+   ```yarn add react-shared-state```   
+   or   
+   ```npm install react-shared-state```
 
-1. Install  
-   `yarn add react-shared-state` or `npm install react-shared-state`
-
-2. Create provider
+## Quickstart  
+https://soofty.gitbook.io/react-shared-state/quickstart
     
-    `simple-provider.js`
-    ```javascript
-    import React from 'react'
-    import { createProvider } from 'react-shared-state'
-    
-    const SimpleProvider = createProvider('simple_provider')
-    ```
-
-3. Add it to your app root  
-    `app.js`
-    
-    ```javascript
-    export function App() {
-      return (
-        <SimpleProvider initialState={{ name: 'Anonymous' }}>
-          <Hello />
-        </SimpleProvider>
-      )
-    }
-    ```
-
-4. Use it with your component
-
-    `hello.js`
-    ```javascript
-    import React from 'react'
-    import { SimpleProvider } from './simple-provider.js'
-    
-    const HelloComponent = (props) => {
-      <div>
-        <h1> Hello, {props.name} </h1>
-        <button onClick={() => props.store.setState({ name: 'John' })}>Set Name</button>
-      </div>
-    }
-    
-    export const Hello = SimpleProvider.connect((store) => ({
-      store,
-      name: store.state.name
-    }))(HelloComponent) 
-    ```
-
-
-### Logging
-You can add logging for all stores
+### 1. Create provider
 
 ```javascript
-import { ProviderComponent} from 'react-shared-state'
+// simple-provider.js
+import React from 'react'
+import { createProvider } from 'react-shared-state'
 
-ProviderComponent.DEBUG = true
+const SimpleProvider = createProvider('simple_provider')
 ```
 
-or individually
+### 2. Add it to your app root  
+```javascript
+// app.js
+export function App() {
+  return (
+    <SimpleProvider initialState={{ name: 'Anonymous' }}>
+      <Hello />
+    </SimpleProvider>
+  )
+}
+```
+
+### 3. Use it with your component
 
 ```javascript
-<SimpleProvider ... debug={true}>
-   ...
-</SimpleProvider>
+// hello.js
+import React from 'react'
+import { SimpleProvider } from './simple-provider.js'
+
+const HelloComponent = (props) => {
+  <div>
+    <h1> Hello, {props.name} </h1>
+    <button onClick={() => props.store.setState({ name: 'John' })}>Set Name</button>
+  </div>
+}
+
+export const Hello = SimpleProvider.connect((store) => ({
+  store,
+  name: store.state.name
+}))(HelloComponent) 
 ```
-![image](https://user-images.githubusercontent.com/29029/30979245-d2b6d146-a485-11e7-81a8-da0982c027b8.png)
+    
+## Documentation  
+https://soofty.gitbook.io/react-shared-state/documentation
+
+## Live example  
+https://codesandbox.io/s/wy308n0k88
 
 
-## 0.1.x => 0.2.x migration guide
+# 0.1.x => 0.2.x migration guide
 
 **Important!** 0.2 has changed `connect`'s behavior.
 
