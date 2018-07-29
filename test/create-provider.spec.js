@@ -1,4 +1,5 @@
 import React from 'react'
+import 'raf/polyfill';
 
 import { createProvider, ProviderComponent } from '../src'
 import TestUtils from 'react-dom/test-utils'
