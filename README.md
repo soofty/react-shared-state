@@ -6,8 +6,6 @@
 
 Very simple shared state for your react app.
 
-{% code-tabs %}
-{% code-tabs-item title="app.js" %}
 ```jsx
 import React from 'react'
 import { createProvider } from 'react-shared-state'
@@ -33,8 +31,6 @@ export function App() {
   )
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ### Install
 
