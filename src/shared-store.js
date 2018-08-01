@@ -4,9 +4,9 @@ export class SharedStore {
   debug = false
   onStateChange = null
 
-  constructor(storeName, initialState={}) {
+  constructor(storeId, initialState={}) {
     this.onStateChange = new signals.Signal()
-    this.storeName = storeName
+    this.storeId = storeId
     this.state = initialState
   }
 
@@ -21,7 +21,7 @@ export class SharedStore {
     }
 
     if (this.debug) {
-      console.group(`SharedState: updated ${this.storeName}`)
+      console.group(`SharedState: updated ${this.storeId}`)
       console.log(`Old state  `, this.state)
       console.log(`Changes    `, partialState)
       console.log(`New state  `, newState)

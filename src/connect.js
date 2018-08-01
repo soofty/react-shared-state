@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-export function connect(name, storeToProps) {
+export function connect(storeId, storeToProps) {
   if (!storeToProps) {
     throw Error(`stateToProps is undefined for ${name}`)
   }
@@ -23,13 +23,13 @@ export function connect(name, storeToProps) {
 
       constructor(props, context) {
         super()
-        if (!context[name]) {
+        if (!context[storeId]) {
           /* eslint-disable no-console */
-          console.error(`SharedState provider was not found at context.${name}`)
+          console.error(`SharedState provider was not found at context.${storeId}`)
           /* eslint-enable no-console */
           return
         }
-        this.store = context[name]
+        this.store = context[storeId]
         this.store.onStateChange.add(this.onStateChange)
 
         this.state = storeToProps(this.store, props)
@@ -56,7 +56,7 @@ export function connect(name, storeToProps) {
     }
 
     MapHoc.contextTypes = {
-      [name]: PropTypes.any
+      [storeId]: PropTypes.any
     }
 
     return MapHoc

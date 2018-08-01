@@ -8,7 +8,7 @@
 import React from 'react'
 import { createProvider } from 'react-shared-state'
 
-const SimpleProvider = createProvider('simple_provider')
+const SimpleProvider = createProvider()
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}

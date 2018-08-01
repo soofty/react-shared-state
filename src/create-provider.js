@@ -10,23 +10,36 @@ export class ProviderComponent extends React.Component {
 }
 
 
-export function createProvider(name, StoreClass = SharedStore) {
+export function createProvider(StoreClass=SharedStore, storeId) {
+  //storeId, StoreClass = SharedStore
+  if (typeof StoreClass === 'string') {
+    throw new Error(
+      'createProvider signature createProvider(name, StoreClass) is deprecated.' +
+      'Please use createProvider([StoreClass], [storeId]). Also name is not required anymore.' +
+      `You've called it with ${StoreClass} as first argument`
+    )
+  }
+
+  if (storeId === undefined) {
+    storeId = StoreClass.name
+  }
+
   class Provider extends ProviderComponent {
     sharedStore = null
 
     constructor(props, context) {
       super(props, context)
-      this.sharedStore = new StoreClass(name, props.initialState)
+      this.sharedStore = new StoreClass(storeId, props.initialState)
       this.sharedStore.setDebug(props.debug || ProviderComponent.DEBUG)
     }
 
     static connect(mapStateToProps) {
-      return connect(name, mapStateToProps)
+      return connect(storeId, mapStateToProps)
     }
 
     getChildContext() {
       return {
-        [name]: this.sharedStore
+        [storeId]: this.sharedStore
       }
     }
 
@@ -39,13 +52,7 @@ export function createProvider(name, StoreClass = SharedStore) {
   }
 
   Provider.childContextTypes = {
-    [name]: PropTypes.object
+    [storeId]: PropTypes.object
   }
   return Provider
-}
-
-
-export function getProvider(name, StoreClass = SharedStore) {
-  console.warn('getProvider is deprecated. Please use createProvider instead')
-  return createProvider(name, StoreClass)
 }
