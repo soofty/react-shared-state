@@ -1,6 +1,6 @@
 # Quickstart
 
-#### 1. Create provider
+## 1. Create provider
 
 {% code-tabs %}
 {% code-tabs-item title="simpler-provider.js" %}
@@ -13,7 +13,7 @@ const SimpleProvider = createProvider()
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-#### 2. Add provider to the root component of your application
+## 2. Add provider to the root component of your application
 
 {% code-tabs %}
 {% code-tabs-item title="app.js" %}
@@ -25,12 +25,11 @@ export function App() {
     </SimpleProvider>
   )
 }
-
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-#### 3. Connect provider's store to your component
+## 3. Connect provider's store to your component
 
 {% code-tabs %}
 {% code-tabs-item title="hello.js" %}
@@ -48,8 +47,7 @@ const HelloComponent = (props) => {
 export const Hello = SimpleProvider.connect((store) => ({
   store,
   name: store.state.name
-}))(HelloComponent) 
-
+}))(HelloComponent)
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}

@@ -15,7 +15,7 @@ class NameStore extends SharedStore {
 }
 
 const NameProvider = createProvider(NameStore)
- 
+
 const HelloComponent = (props) => {
   return <div>
     <h1> Hello, {props.name} </h1>
@@ -63,5 +63,5 @@ or
 
 ## 0.2.x =&gt; 0.3.x migration guide
 
-getProvider replaced with createProvider(StoreClass?: class, storeId?: string)
+getProvider replaced with createProvider\(StoreClass?: class, storeId?: string\)
 
