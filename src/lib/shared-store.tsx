@@ -1,21 +1,25 @@
-import signals from 'signals'
+import signals, { Signal } from 'signals'
 
-export class SharedStore {
+export type Dict<T = any> = Record<any, T>
+
+export class SharedStore<State extends Dict = Dict> {
+  storeId: string
+  state: State
   debug = false
-  onStateChange = null
+  onStateChange: Signal
 
-  constructor(storeId, initialState={}) {
+  constructor(storeId: string, initialState: State = {} as Dict) {
     this.onStateChange = new signals.Signal()
     this.storeId = storeId
     this.state = initialState
   }
 
-  setDebug(debug) {
+  setDebug(debug: boolean) {
     this.debug = debug
   }
 
-  setState(partialState) {
-    let newState = {
+  setState(partialState: Partial<State>) {
+    const newState: State = {
       ...this.state,
       ...partialState
     }
@@ -35,10 +39,10 @@ export class SharedStore {
     this.stateDidSet(oldState, newState)
   }
 
-  // eslint-disable-next-line
-  stateDidSet(oldState, newState) {}
+  // tslint:disable-next-line
+  stateDidSet(oldState: State, newState: State): void {}
 
-  getState() {
+  getState(): State {
     return this.state
   }
 }

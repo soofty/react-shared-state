@@ -1,6 +1,3 @@
-.idea
-es
-node_modules
 dist
-lib
-/yarn-error.log
+node_modules
+.idea

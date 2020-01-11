@@ -1,8 +1,12 @@
 {
-  "presets": [ "./tools/babel-preset" ],
+  "presets": [
+    "@babel/env",
+    "@babel/typescript",
+    "@babel/react",
+  ],
   "plugins": [
-    "transform-object-rest-spread",
-    "transform-class-properties",
-    "transform-export-extensions",
+    "@babel/plugin-proposal-numeric-separator",
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread"
   ]
 }

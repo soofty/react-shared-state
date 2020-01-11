@@ -3,15 +3,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { SharedStore } from './shared-store'
-import { connect } from './connect'
+import { ComponentDecorator, connect, StoreToPropF } from './connect'
 
 export class ProviderComponent extends React.Component {
   static DEBUG = false // we can set it globally
+
+  static connect(mapStateToProps: StoreToPropF<any>): (InnerComponent: React.ElementType) => ComponentDecorator<any, any> {
+    throw "Not Implemented"
+  }
 }
 
-
-export function createProvider(StoreClass=SharedStore, storeId) {
-  //storeId, StoreClass = SharedStore
+// @ts-ignore
+export function createProvider(StoreClass: typeof SharedStore = SharedStore, storeId: string) {
   if (typeof StoreClass === 'string') {
     throw new Error(
       'createProvider signature createProvider(name, StoreClass) is deprecated.' +
@@ -25,15 +28,15 @@ export function createProvider(StoreClass=SharedStore, storeId) {
   }
 
   class Provider extends ProviderComponent {
-    sharedStore = null
+    sharedStore: SharedStore
 
-    constructor(props, context) {
+    constructor(props: any, context: any) {
       super(props, context)
       this.sharedStore = new StoreClass(storeId, props.initialState)
       this.sharedStore.setDebug(props.debug || ProviderComponent.DEBUG)
     }
 
-    static connect(mapStateToProps) {
+    static connect(mapStateToProps: StoreToPropF<any>) {
       return connect(storeId, mapStateToProps)
     }
 
@@ -47,12 +50,12 @@ export function createProvider(StoreClass=SharedStore, storeId) {
       if (!this.props.children) {
         return null
       }
-      return <span>{this.props.children}</span>
+      return <>{this.props.children}</>
     }
   }
 
-  Provider.childContextTypes = {
+  (Provider as any).childContextTypes = {
     [storeId]: PropTypes.object
   }
-  return Provider
+  return Provider as any
 }
